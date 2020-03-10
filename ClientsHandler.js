@@ -8,7 +8,7 @@ function Peer(host, port) {
 
 module.exports = {
 
-    handleClientJoining: function (sock, dirname, maxPeerNumber, peerList) {
+    handleClientJoining: function (version, sock, dirname, maxPeerNumber, peerList) {
 
         let buffer;
 
@@ -19,7 +19,7 @@ module.exports = {
 
             console.log(`Peer table full: ${sock.remoteAddress}:${sock.remotePort} redirected\n`);
 
-            buffer = CPTPPacket.encode(3314, 2, dirname, 1, true, peerList[0].port, peerList[0].host);
+            buffer = CPTPPacket.encode(version, 2, dirname, 1, true, peerList[0].port, peerList[0].host);
 
         } else { //peer table not full
             //accept connection
@@ -32,9 +32,9 @@ module.exports = {
             let peerNumber = (hasPeerInfo) ? 1 : 0;
 
             if (hasPeerInfo)
-                buffer = CPTPPacket.encode(3314, 1, dirname, peerNumber, true, peerList[0].port, peerList[0].host);
+                buffer = CPTPPacket.encode(version, 1, dirname, peerNumber, true, peerList[0].port, peerList[0].host);
             else
-                buffer = CPTPPacket.encode(3314, 1, dirname, peerNumber, false);
+                buffer = CPTPPacket.encode(version, 1, dirname, peerNumber, false);
 
             peerList.push(new Peer(sock.remoteAddress, sock.remotePort));
 

@@ -117,7 +117,7 @@ if (isClient) {
 
 server.on('connection', function (sock) {
 
-    handler.handleClientJoining(sock, dirname, maxPeerNumber, peerList); //array passed by reference so it's good
+    handler.handleClientJoining(version, sock, dirname, maxPeerNumber, peerList); //array passed by reference so it's good
 
 });
 

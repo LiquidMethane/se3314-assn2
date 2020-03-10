@@ -84,10 +84,8 @@ if (isClient) {
         let response = CPTPPacket.decode(data);
         if (response[0] != 3314) return; //ignore packet if version is not 3314
 
-
-
-        console.log(`Connected to peer on ${response[2]}:${peer_port} at timestamp: ${singleton.getTimestamp()}\n`); //need to change peer_host to sender ID !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
+        console.log(`Connected to peer on ${response[2]}:${peer_port} at timestamp: ${singleton.getTimestamp()}\n`); 
+        console.log(`This peer address is ${server_host}:${server_port} located at ${dirname}\n`);
         console.log(`Received ACK from ${response[2]}:${peer_port}\n`);
 
         if (response[3]) {
@@ -106,9 +104,7 @@ if (isClient) {
     client.on('close', () => {
         server.listen(server_port, server_host); //server listens on the desired port
 
-        console.log(`This peer address is ${server_host}:${server_port} located at ${dirname}\n`);
-
-
+        
     })
 
 } else {
